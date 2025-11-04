@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#brainGradient)" opacity="0.1"/>
+  
+  <!-- Neural network nodes -->
+  <circle cx="100" cy="50" r="12" fill="url(#brainGradient)"/>
+  <circle cx="60" cy="90" r="10" fill="url(#brainGradient)"/>
+  <circle cx="140" cy="90" r="10" fill="url(#brainGradient)"/>
+  <circle cx="80" cy="130" r="10" fill="url(#brainGradient)"/>
+  <circle cx="120" cy="130" r="10" fill="url(#brainGradient)"/>
+  <circle cx="100" cy="160" r="12" fill="url(#brainGradient)"/>
+  
+  <!-- Connection lines -->
+  <line x1="100" y1="50" x2="60" y2="90" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="100" y1="50" x2="140" y2="90" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="60" y1="90" x2="80" y2="130" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="60" y1="90" x2="120" y2="130" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="140" y1="90" x2="80" y2="130" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="140" y1="90" x2="120" y2="130" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="80" y1="130" x2="100" y2="160" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  <line x1="120" y1="130" x2="100" y2="160" stroke="url(#brainGradient)" stroke-width="3" opacity="0.6"/>
+  
+  <!-- Center highlight nodes -->
+  <circle cx="100" cy="50" r="6" fill="#ffffff"/>
+  <circle cx="100" cy="160" r="6" fill="#ffffff"/>
+</svg>
