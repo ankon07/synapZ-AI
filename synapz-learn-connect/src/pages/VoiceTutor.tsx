@@ -9,12 +9,12 @@ import SpeechService from '@/lib/speechService';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { toast } from 'sonner';
 import * as pdfjsLib from 'pdfjs-dist';
-import mammoth from 'mammoth';
+import * as mammoth from 'mammoth';
 
 // Configure PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
-const API_KEY = 'AIzaSyB_GYm-sd2nD-LYGEYbUO2NhjUZ5UwCw6Q';
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 interface Lesson {
