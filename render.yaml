@@ -1,0 +1,75 @@
+# Render Configuration for SYNAPZ AI Backend Services
+# This file defines infrastructure as code for deploying on Render.com
+
+services:
+  # FastAPI Token Server - Web Service
+  - type: web
+    name: synapz-api-server
+    runtime: docker
+    dockerfilePath: ./ai-avatar/Dockerfile
+    dockerContext: ./ai-avatar
+    plan: starter
+    region: oregon
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: TAVUS_API_KEY
+        sync: false
+      - key: PERSONA_ID
+        sync: false
+      - key: REPLICA_ID
+        sync: false
+      - key: N8N_MCP_SERVER_URL
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: PORT
+        value: 8000
+      - key: FRONTEND_URL
+        value: https://synap-z-ai.vercel.app
+
+  # LiveKit AI Agent (Sara) - Background Worker
+  - type: worker
+    name: synapz-ai-agent
+    runtime: python
+    plan: starter
+    region: oregon
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python agent.py start
+    rootDir: ai-avatar
+    envVars:
+      - key: LIVEKIT_URL
+        sync: false
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: TAVUS_API_KEY
+        sync: false
+      - key: PERSONA_ID
+        sync: false
+      - key: REPLICA_ID
+        sync: false
+      - key: N8N_MCP_SERVER_URL
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false

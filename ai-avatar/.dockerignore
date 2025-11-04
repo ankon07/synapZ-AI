@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+KMS/logs/
+
+# Documentation
+*.md
+START_GUIDE.md
+NAVIGATION_CONTROL_GUIDE.md
+NAVIGATION_SUMMARY.md
+ROUTES_REFERENCE.md
+
+# Git
+.git/
+.gitignore
+
+# Other
+.DS_Store

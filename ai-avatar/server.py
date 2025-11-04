@@ -14,9 +14,21 @@ load_dotenv()
 app = FastAPI()
 
 # Configure CORS
+# Get allowed origins from environment variable or use defaults
+ALLOWED_ORIGINS = os.environ.get(
+    "ALLOWED_ORIGINS",
+    "http://localhost:5173,http://localhost:3000,http://localhost:3081"
+).split(",")
+
+# Add production frontend URL if available
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
+if FRONTEND_URL:
+    ALLOWED_ORIGINS.append(FRONTEND_URL)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Local development
         "http://localhost:5173",
         "http://localhost:3000",
         "http://localhost:3081",
@@ -26,8 +38,10 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://127.0.0.1:3081",
         "http://127.0.0.1:8080",
-        "http://127.0.0.1:8081"
-    ],
+        "http://127.0.0.1:8081",
+        # Production - Add your Vercel URL here
+        # Example: "https://your-app.vercel.app"
+    ] + ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
