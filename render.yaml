@@ -2,13 +2,13 @@
 # This file defines infrastructure as code for deploying on Render.com
 
 services:
-  # FastAPI Token Server - Web Service
+  # FastAPI Token Server - Web Service (FREE TIER)
   - type: web
     name: synapz-api-server
     runtime: docker
     dockerfilePath: ./ai-avatar/Dockerfile
     dockerContext: ./ai-avatar
-    plan: starter
+    plan: free
     region: oregon
     branch: main
     healthCheckPath: /health
@@ -41,35 +41,37 @@ services:
         value: https://synap-z-ai.vercel.app
 
   # LiveKit AI Agent (Sara) - Background Worker
-  - type: worker
-    name: synapz-ai-agent
-    runtime: python
-    plan: starter
-    region: oregon
-    branch: main
-    buildCommand: pip install -r requirements.txt
-    startCommand: python agent.py start
-    rootDir: ai-avatar
-    envVars:
-      - key: LIVEKIT_URL
-        sync: false
-      - key: LIVEKIT_API_KEY
-        sync: false
-      - key: LIVEKIT_API_SECRET
-        sync: false
-      - key: OPENAI_API_KEY
-        sync: false
-      - key: TAVUS_API_KEY
-        sync: false
-      - key: PERSONA_ID
-        sync: false
-      - key: REPLICA_ID
-        sync: false
-      - key: N8N_MCP_SERVER_URL
-        sync: false
-      - key: YOUTUBE_API_KEY
-        sync: false
-      - key: GOOGLE_CLIENT_ID
-        sync: false
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false
+  # COMMENTED OUT FOR FREE TIER DEPLOYMENT
+  # Uncomment this section when ready to enable voice AI features ($7/month)
+  # - type: worker
+  #   name: synapz-ai-agent
+  #   runtime: python
+  #   plan: starter
+  #   region: oregon
+  #   branch: main
+  #   buildCommand: pip install -r requirements.txt
+  #   startCommand: python agent.py start
+  #   rootDir: ai-avatar
+  #   envVars:
+  #     - key: LIVEKIT_URL
+  #       sync: false
+  #     - key: LIVEKIT_API_KEY
+  #       sync: false
+  #     - key: LIVEKIT_API_SECRET
+  #       sync: false
+  #     - key: OPENAI_API_KEY
+  #       sync: false
+  #     - key: TAVUS_API_KEY
+  #       sync: false
+  #     - key: PERSONA_ID
+  #       sync: false
+  #     - key: REPLICA_ID
+  #       sync: false
+  #     - key: N8N_MCP_SERVER_URL
+  #       sync: false
+  #     - key: YOUTUBE_API_KEY
+  #       sync: false
+  #     - key: GOOGLE_CLIENT_ID
+  #       sync: false
+  #     - key: GOOGLE_CLIENT_SECRET
+  #       sync: false

@@ -18,21 +18,51 @@ Before starting, ensure you have:
 
 ## 🏗️ Architecture Overview
 
-You'll deploy **TWO separate services**:
+Your backend consists of **TWO services**:
 
 ### 1. **FastAPI Token Server** (Web Service)
 - Generates LiveKit access tokens for clients
 - Provides YouTube transcript API
 - Public URL: `https://synapz-api-server.onrender.com`
-- **Cost**: Free tier available (spins down after 15 min inactivity)
+- **Cost**: ✅ **FREE TIER** (currently configured)
 
 ### 2. **LiveKit AI Agent (Sara)** (Background Worker)
 - The actual AI voice assistant
 - Connects to LiveKit cloud and processes voice
 - Runs continuously in the background
 - **Cost**: ~$7/month (Starter plan required)
+- **Status**: ⚠️ **DISABLED** (commented out in render.yaml)
 
-**Total estimated monthly cost**: $7
+---
+
+## 🆓 Current Configuration: FREE TIER
+
+The render.yaml is currently configured to deploy **ONLY the FastAPI server on the free tier**. This means:
+
+### ✅ What WILL Work:
+- YouTube transcript API endpoints
+- LiveKit token generation (generates tokens but no agent to connect to)
+- Health check endpoint
+- All non-voice features of your application
+
+### ❌ What WON'T Work:
+- **Voice conversations with Sara** - No agent running to process voice
+- **Floating AI Avatar voice feature** - Will fail to connect
+- Any LiveKit-based real-time voice interactions
+
+### 📊 Free Tier Limitations:
+- **Spins down after 15 minutes** of inactivity (30-60 second cold start)
+- **750 free instance hours/month** (~31 days of 24/7 runtime)
+- **100 GB bandwidth/month** included
+- ✅ Custom domains supported
+- ✅ Free HTTPS/SSL
+
+### 💰 Cost Comparison:
+- **Current (Free Tier)**: $0/month - FastAPI only, no voice features
+- **With Voice AI**: $7/month - Add background worker for full functionality
+- **Always-On (Both)**: $14/month - Both services on paid plans, no cold starts
+
+**To enable voice features later:** Uncomment the AI agent section in render.yaml and redeploy.
 
 ---
 
