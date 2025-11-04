@@ -1,0 +1,13 @@
+livekit-agents
+livekit-plugins-openai
+livekit-plugins-noise-cancellation
+livekit-plugins-silero
+livekit-plugins-turn-detector
+requests
+python-dotenv
+pydantic-ai-slim[openai,mcp]
+livekit-agents[tavus]~=1.0
+fastapi
+uvicorn[standard]
+livekit
+google-api-python-client
