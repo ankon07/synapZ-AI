@@ -129,16 +129,24 @@ const Pricing = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 sm:py-12">
-        {/* Back button — only show if user is logged in (i.e., not landing page) */}
+        {/* Navigation bar — shows for logged-in users */}
         {user && (
-          <Button
-            variant="ghost"
-            className="mb-6 sm:mb-8 gap-2 text-muted-foreground hover:text-foreground"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </Button>
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
+            <Button
+              variant="ghost"
+              className="gap-2 text-muted-foreground hover:text-foreground"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </Button>
+            <Button
+              className="gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold shadow-lg shadow-violet-500/25"
+              onClick={() => navigate("/dashboard")}
+            >
+              Go to Dashboard
+            </Button>
+          </div>
         )}
 
         {/* Header */}

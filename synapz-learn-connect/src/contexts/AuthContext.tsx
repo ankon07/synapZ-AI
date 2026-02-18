@@ -11,6 +11,7 @@ import {
   logoutUser,
   getUserProfile,
   updateLastLogin,
+  handleGoogleRedirectResult,
   type User,
   type UserData,
 } from "@/lib/firebase";
@@ -49,6 +50,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Listen to Firebase auth state
   useEffect(() => {
+    // Handle any pending Google redirect sign-in result
+    handleGoogleRedirectResult().catch(console.error);
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
 

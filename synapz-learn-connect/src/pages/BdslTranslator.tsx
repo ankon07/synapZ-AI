@@ -1,22 +1,30 @@
-import { Mic, Volume2, HelpCircle, Play, Repeat } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import MainLayout from '@/components/layout/MainLayout';
+import { Mic, Volume2, HelpCircle, Play, Repeat } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import MainLayout from "@/components/layout/MainLayout";
+import { useAuth } from "@/contexts/AuthContext";
 
 const BdslTranslator = () => {
+  const { user, userProfile } = useAuth();
+  const displayName = userProfile?.displayName || user?.displayName || "User";
   const vocabularyGoal = 75;
 
   const signs = [
-    { id: 1, word: 'Tree', icon: '🌳', bangla: 'গাছ' },
-    { id: 2, word: 'Book', icon: '📚', bangla: 'বই' },
-    { id: 3, word: 'Pen', icon: '🖊️', bangla: 'কলম' },
+    { id: 1, word: "Tree", icon: "🌳", bangla: "গাছ" },
+    { id: 2, word: "Book", icon: "📚", bangla: "বই" },
+    { id: 3, word: "Pen", icon: "🖊️", bangla: "কলম" },
   ];
 
   const achievements = [
-    { id: 1, icon: '🎯', title: 'Coame Pesting', date: 'Sima lo nrobr, 2023' },
-    { id: 2, icon: '🏆', title: 'Loove Pln', subtitle: 'Sign Language ভাষার পরীক্ষণ' },
+    { id: 1, icon: "🎯", title: "Coame Pesting", date: "Sima lo nrobr, 2023" },
+    {
+      id: 2,
+      icon: "🏆",
+      title: "Loove Pln",
+      subtitle: "Sign Language ভাষার পরীক্ষণ",
+    },
   ];
 
   return (
@@ -30,7 +38,7 @@ const BdslTranslator = () => {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500" />
                 <div>
-                  <p className="font-semibold">Student: Rohan M</p>
+                  <p className="font-semibold">Student: {displayName}</p>
                 </div>
               </div>
             </Card>
@@ -70,7 +78,9 @@ const BdslTranslator = () => {
                   <span className="text-3xl">🤖</span>
                 </div>
                 <h3 className="font-semibold mb-2">AI Tutor Guide</h3>
-                <p className="text-sm text-muted-foreground mb-4">Meet your companion</p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Meet your companion
+                </p>
                 <Button className="w-full bg-secondary hover:bg-secondary/90">
                   Hear Guide
                 </Button>
@@ -83,7 +93,9 @@ const BdslTranslator = () => {
             {/* Page Header with Voice Status */}
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-1">BdSL Translator - Digital Sign Language</h1>
+                <h1 className="text-3xl font-bold mb-1">
+                  BdSL Translator - Digital Sign Language
+                </h1>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg">
                 <Mic className="w-5 h-5 text-primary animate-pulse" />
@@ -93,13 +105,15 @@ const BdslTranslator = () => {
 
             {/* Interactive Practice */}
             <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Interactive Practice - প্রশিক্ষন করুন</h2>
-              
+              <h2 className="text-xl font-semibold mb-4">
+                Interactive Practice - প্রশিক্ষন করুন
+              </h2>
+
               {/* Quiz Question */}
               <div className="bg-primary/5 rounded-lg p-6 mb-6">
                 <h3 className="text-lg font-semibold mb-4">স্বতঃখেলার কেডি</h3>
                 <p className="text-muted-foreground mb-4">এই সনিষ্ট এচটি কি?</p>
-                
+
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   {signs.map((sign) => (
                     <Button
@@ -109,17 +123,21 @@ const BdslTranslator = () => {
                     >
                       <span className="text-3xl">{sign.icon}</span>
                       <span className="text-sm">{sign.word}</span>
-                      <span className="text-xs text-muted-foreground">({sign.bangla})</span>
+                      <span className="text-xs text-muted-foreground">
+                        ({sign.bangla})
+                      </span>
                     </Button>
                   ))}
                 </div>
-                
+
                 <Button className="w-full">Submit Answer</Button>
               </div>
 
               {/* Live Captioning */}
               <div className="space-y-3">
-                <h3 className="font-semibold">Live Captioning - স্বাক্ষর ক্যপশন</h3>
+                <h3 className="font-semibold">
+                  Live Captioning - স্বাক্ষর ক্যপশন
+                </h3>
                 <div className="bg-muted rounded-lg p-4">
                   <p className="text-sm mb-2">
                     খেলক: "হয়ন আবার সাল, "ই-এ" সানামী কোমান?
@@ -156,7 +174,7 @@ const BdslTranslator = () => {
               <h2 className="text-xl font-semibold mb-4">
                 আজ তোরায় নতন সংখ্য প্রিপন এখং সুমিন লায়ুবিছাহ প্রপাশিল করব।
               </h2>
-              
+
               <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-8 flex items-center justify-center mb-4">
                 {/* 3D Avatar Placeholder */}
                 <div className="w-64 h-64 flex items-center justify-center">
@@ -164,7 +182,9 @@ const BdslTranslator = () => {
                     <div className="w-48 h-48 mx-auto mb-4 rounded-lg bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center">
                       <span className="text-6xl">🧑</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">3D Sign Language Avatar</p>
+                    <p className="text-sm text-muted-foreground">
+                      3D Sign Language Avatar
+                    </p>
                   </div>
                 </div>
               </div>
@@ -185,8 +205,12 @@ const BdslTranslator = () => {
                   </div>
                   <div>
                     <p className="font-medium">{vocabularyGoal}%</p>
-                    <p className="text-sm text-muted-foreground">ভূকজাবলার লোথো</p>
-                    <p className="text-xs text-muted-foreground">Vocabulary Goal</p>
+                    <p className="text-sm text-muted-foreground">
+                      ভূকজাবলার লোথো
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Vocabulary Goal
+                    </p>
                   </div>
                 </div>
               </div>
@@ -219,17 +243,24 @@ const BdslTranslator = () => {
             <h3 className="text-lg font-semibold mb-4">Achievements</h3>
             <div className="space-y-4">
               {achievements.map((achievement) => (
-                <div key={achievement.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+                <div
+                  key={achievement.id}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-muted/50"
+                >
                   <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-2xl">
                     {achievement.icon}
                   </div>
                   <div className="flex-1">
                     <p className="font-medium">{achievement.title}</p>
                     {achievement.subtitle && (
-                      <p className="text-xs text-muted-foreground">{achievement.subtitle}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {achievement.subtitle}
+                      </p>
                     )}
                     {achievement.date && (
-                      <p className="text-xs text-muted-foreground">{achievement.date}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {achievement.date}
+                      </p>
                     )}
                   </div>
                   <Button variant="ghost" size="sm">

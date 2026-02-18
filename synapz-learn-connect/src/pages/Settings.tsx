@@ -1,15 +1,34 @@
-import { Bell, Globe, Volume2, Moon, Sun, User, Lock, Palette } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
-import { Separator } from '@/components/ui/separator';
-import MainLayout from '@/components/layout/MainLayout';
-import { useState } from 'react';
+import {
+  Bell,
+  Globe,
+  Volume2,
+  Moon,
+  Sun,
+  User,
+  Lock,
+  Palette,
+} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Separator } from "@/components/ui/separator";
+import MainLayout from "@/components/layout/MainLayout";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Settings = () => {
+  const { user, userProfile } = useAuth();
+  const displayName = userProfile?.displayName || user?.displayName || "User";
+  const email = userProfile?.email || user?.email || "";
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [soundEffects, setSoundEffects] = useState(true);
@@ -22,7 +41,9 @@ const Settings = () => {
         {/* Page Header */}
         <div>
           <h1 className="text-3xl font-bold mb-1">Settings</h1>
-          <p className="text-muted-foreground">Customize your learning experience</p>
+          <p className="text-muted-foreground">
+            Customize your learning experience
+          </p>
         </div>
 
         {/* Account Settings */}
@@ -38,9 +59,11 @@ const Settings = () => {
             <div className="flex items-center justify-between">
               <div>
                 <Label className="text-base font-medium">Full Name</Label>
-                <p className="text-sm text-muted-foreground">Rohan M</p>
+                <p className="text-sm text-muted-foreground">{displayName}</p>
               </div>
-              <Button variant="outline" size="sm">Edit</Button>
+              <Button variant="outline" size="sm">
+                Edit
+              </Button>
             </div>
 
             <Separator />
@@ -48,9 +71,11 @@ const Settings = () => {
             <div className="flex items-center justify-between">
               <div>
                 <Label className="text-base font-medium">Email</Label>
-                <p className="text-sm text-muted-foreground">rohan@example.com</p>
+                <p className="text-sm text-muted-foreground">{email}</p>
               </div>
-              <Button variant="outline" size="sm">Edit</Button>
+              <Button variant="outline" size="sm">
+                Edit
+              </Button>
             </div>
 
             <Separator />
@@ -90,9 +115,13 @@ const Settings = () => {
                   step={0.1}
                   className="flex-1"
                 />
-                <span className="text-sm text-muted-foreground w-12 text-right">Fast</span>
+                <span className="text-sm text-muted-foreground w-12 text-right">
+                  Fast
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground">Current: {voiceSpeed[0]}x</p>
+              <p className="text-sm text-muted-foreground">
+                Current: {voiceSpeed[0]}x
+              </p>
             </div>
 
             <Separator />
@@ -100,7 +129,9 @@ const Settings = () => {
             <div className="space-y-2">
               <Label className="text-base font-medium">Font Size</Label>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-muted-foreground w-12">Small</span>
+                <span className="text-sm text-muted-foreground w-12">
+                  Small
+                </span>
                 <Slider
                   value={fontSize}
                   onValueChange={setFontSize}
@@ -109,9 +140,13 @@ const Settings = () => {
                   step={2}
                   className="flex-1"
                 />
-                <span className="text-sm text-muted-foreground w-12 text-right">Large</span>
+                <span className="text-sm text-muted-foreground w-12 text-right">
+                  Large
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground">Current: {fontSize[0]}px</p>
+              <p className="text-sm text-muted-foreground">
+                Current: {fontSize[0]}px
+              </p>
             </div>
 
             <Separator />
@@ -119,7 +154,9 @@ const Settings = () => {
             <div className="flex items-center justify-between">
               <div>
                 <Label className="text-base font-medium">Voice Gender</Label>
-                <p className="text-sm text-muted-foreground">Choose voice preference</p>
+                <p className="text-sm text-muted-foreground">
+                  Choose voice preference
+                </p>
               </div>
               <Select defaultValue="female">
                 <SelectTrigger className="w-32">
@@ -136,8 +173,12 @@ const Settings = () => {
 
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-base font-medium">High Contrast Mode</Label>
-                <p className="text-sm text-muted-foreground">Improve visual clarity</p>
+                <Label className="text-base font-medium">
+                  High Contrast Mode
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Improve visual clarity
+                </p>
               </div>
               <Switch />
             </div>
@@ -156,8 +197,12 @@ const Settings = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-base font-medium">Primary Language</Label>
-                <p className="text-sm text-muted-foreground">Interface language</p>
+                <Label className="text-base font-medium">
+                  Primary Language
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Interface language
+                </p>
               </div>
               <Select defaultValue="en">
                 <SelectTrigger className="w-40">
@@ -174,8 +219,12 @@ const Settings = () => {
 
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-base font-medium">Learning Language</Label>
-                <p className="text-sm text-muted-foreground">Language for lessons</p>
+                <Label className="text-base font-medium">
+                  Learning Language
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Language for lessons
+                </p>
               </div>
               <Select defaultValue="en">
                 <SelectTrigger className="w-40">
@@ -214,7 +263,9 @@ const Settings = () => {
             <div className="flex items-center justify-between">
               <div>
                 <Label className="text-base font-medium">Theme</Label>
-                <p className="text-sm text-muted-foreground">Choose color scheme</p>
+                <p className="text-sm text-muted-foreground">
+                  Choose color scheme
+                </p>
               </div>
               <Select defaultValue="default">
                 <SelectTrigger className="w-40">
@@ -242,10 +293,17 @@ const Settings = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-base font-medium">Push Notifications</Label>
-                <p className="text-sm text-muted-foreground">Receive learning reminders</p>
+                <Label className="text-base font-medium">
+                  Push Notifications
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Receive learning reminders
+                </p>
               </div>
-              <Switch checked={notifications} onCheckedChange={setNotifications} />
+              <Switch
+                checked={notifications}
+                onCheckedChange={setNotifications}
+              />
             </div>
 
             <Separator />
@@ -253,17 +311,26 @@ const Settings = () => {
             <div className="flex items-center justify-between">
               <div>
                 <Label className="text-base font-medium">Sound Effects</Label>
-                <p className="text-sm text-muted-foreground">Play audio feedback</p>
+                <p className="text-sm text-muted-foreground">
+                  Play audio feedback
+                </p>
               </div>
-              <Switch checked={soundEffects} onCheckedChange={setSoundEffects} />
+              <Switch
+                checked={soundEffects}
+                onCheckedChange={setSoundEffects}
+              />
             </div>
 
             <Separator />
 
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-base font-medium">Email Notifications</Label>
-                <p className="text-sm text-muted-foreground">Receive progress updates</p>
+                <Label className="text-base font-medium">
+                  Email Notifications
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Receive progress updates
+                </p>
               </div>
               <Switch defaultChecked />
             </div>

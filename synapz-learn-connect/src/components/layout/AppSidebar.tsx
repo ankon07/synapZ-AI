@@ -11,11 +11,32 @@ import {
   Brain,
   LayoutDashboard,
   CreditCard,
+  LogOut,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 const AppSidebar = () => {
+  const { user, userProfile, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const displayName = userProfile?.displayName || user?.displayName || "User";
+  const photoURL = userProfile?.photoURL || user?.photoURL || "";
+  const initials = displayName
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
     { icon: Mic, label: "Voice Tutor", path: "/voice-tutor" },
@@ -38,11 +59,16 @@ const AppSidebar = () => {
       {/* Student Info */}
       <div className="p-6 border-b">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-            <span className="text-lg font-semibold">R</span>
-          </div>
-          <div>
-            <p className="text-sm font-semibold">Student: Rohan M</p>
+          <Avatar className="w-12 h-12 border-2 border-primary/20">
+            <AvatarImage src={photoURL} alt={displayName} />
+            <AvatarFallback className="bg-gradient-to-br from-primary to-purple-500 text-white font-semibold">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold truncate">
+              Student: {displayName}
+            </p>
           </div>
         </div>
       </div>
@@ -86,6 +112,18 @@ const AppSidebar = () => {
             Hear Guide
           </button>
         </div>
+      </div>
+
+      {/* Logout */}
+      <div className="p-4 border-t">
+        <Button
+          variant="ghost"
+          className="w-full justify-start gap-3 text-red-600 hover:text-red-700 hover:bg-red-50"
+          onClick={handleLogout}
+        >
+          <LogOut className="w-5 h-5" />
+          <span>Sign Out</span>
+        </Button>
       </div>
     </aside>
   );

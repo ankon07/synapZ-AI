@@ -3,6 +3,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
@@ -27,6 +29,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getDatabase(app);
 export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  client_id: '615790237644-lde14re3ltg6a8ra6re9btf5etfku1sr.apps.googleusercontent.com',
+});
 
 // ─── Auth Functions ──────────────────────────────────────
 
@@ -48,16 +53,50 @@ export async function registerWithEmail(
 }
 
 export async function loginWithGoogle() {
-  const result = await signInWithPopup(auth, googleProvider);
-  // Save/update user profile on Google login
-  const snapshot = await get(ref(db, `users/${result.user.uid}`));
-  if (!snapshot.exists()) {
-    await saveUserProfile(result.user, {
-      displayName: result.user.displayName || 'User',
-      role: 'learner',
-    });
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    // Save/update user profile on Google login
+    const snapshot = await get(ref(db, `users/${result.user.uid}`));
+    if (!snapshot.exists()) {
+      await saveUserProfile(result.user, {
+        displayName: result.user.displayName || 'User',
+        role: 'learner',
+      });
+    }
+    return result.user;
+  } catch (error: any) {
+    // If popup is blocked or COOP prevents it, fall back to redirect
+    if (
+      error.code === 'auth/popup-blocked' ||
+      error.code === 'auth/popup-closed-by-user' ||
+      error.code === 'auth/cancelled-popup-request' ||
+      error.message?.includes('Cross-Origin-Opener-Policy')
+    ) {
+      await signInWithRedirect(auth, googleProvider);
+      return null; // Page will redirect, result handled on return
+    }
+    throw error;
   }
-  return result.user;
+}
+
+// Call this on app initialization to handle redirect results
+export async function handleGoogleRedirectResult() {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result?.user) {
+      const snapshot = await get(ref(db, `users/${result.user.uid}`));
+      if (!snapshot.exists()) {
+        await saveUserProfile(result.user, {
+          displayName: result.user.displayName || 'User',
+          role: 'learner',
+        });
+      }
+      return result.user;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 export async function logoutUser() {
