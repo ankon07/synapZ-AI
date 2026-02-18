@@ -11,3 +11,5 @@ fastapi
 uvicorn[standard]
 livekit
 google-api-python-client
+stripe
+youtube-transcript-api

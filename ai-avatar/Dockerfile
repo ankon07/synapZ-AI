@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY server.py .
+COPY payment.py .
 COPY .env* ./
 
 # Expose port

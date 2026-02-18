@@ -1,30 +1,36 @@
-import { 
-  Mic, 
-  Hand, 
-  BarChart3, 
-  MessageSquare, 
-  TrendingUp, 
-  Settings, 
+import {
+  Mic,
+  Hand,
+  BarChart3,
+  MessageSquare,
+  TrendingUp,
+  Settings,
   Lock,
   Briefcase,
   BookOpen,
   Brain,
-  LayoutDashboard
-} from 'lucide-react';
-import { NavLink } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+  LayoutDashboard,
+  CreditCard,
+} from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const AppSidebar = () => {
   const navItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
-    { icon: Mic, label: 'Voice Tutor', path: '/voice-tutor' },
-    { icon: Hand, label: 'Sign Language Converter', path: '/schedule' },
-    { icon: Brain, label: 'Neurodiverse Focus Learning', path: '/adhd-learning' },
-    { icon: Briefcase, label: 'AI Skill Coach', path: '/jobs' },
-    { icon: BookOpen, label: 'Learning History', path: '/lernee-history' },
-    { icon: TrendingUp, label: 'Activity', path: '/activity' },
-    { icon: Lock, label: 'Parents Dashboard', path: '/parent' },
-    { icon: Settings, label: 'Security', path: '/settings' },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
+    { icon: Mic, label: "Voice Tutor", path: "/voice-tutor" },
+    { icon: Hand, label: "Sign Language Converter", path: "/schedule" },
+    {
+      icon: Brain,
+      label: "Neurodiverse Focus Learning",
+      path: "/adhd-learning",
+    },
+    { icon: Briefcase, label: "AI Skill Coach", path: "/jobs" },
+    { icon: BookOpen, label: "Learning History", path: "/lernee-history" },
+    { icon: TrendingUp, label: "Activity", path: "/activity" },
+    { icon: Lock, label: "Parents Dashboard", path: "/parent" },
+    { icon: CreditCard, label: "Pricing & Plans", path: "/pricing" },
+    { icon: Settings, label: "Security", path: "/settings" },
   ];
 
   return (
@@ -52,7 +58,7 @@ const AppSidebar = () => {
                 "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                 isActive
                   ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "text-foreground hover:bg-muted hover:text-foreground"
+                  : "text-foreground hover:bg-muted hover:text-foreground",
               )
             }
           >
@@ -71,7 +77,9 @@ const AppSidebar = () => {
             </div>
             <div>
               <p className="text-sm font-semibold">AI Tutor Guide</p>
-              <p className="text-xs text-muted-foreground">Meet your companion</p>
+              <p className="text-xs text-muted-foreground">
+                Meet your companion
+              </p>
             </div>
           </div>
           <button className="w-full mt-2 px-4 py-2 rounded-lg bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition-colors">

@@ -5,6 +5,7 @@ from livekit import api
 import os
 from dotenv import load_dotenv
 import logging
+from payment import router as payment_router
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound, VideoUnavailable
 import re
@@ -48,6 +49,9 @@ app.add_middleware(
 )
 
 logger = logging.getLogger(__name__)
+
+# Include payment routes
+app.include_router(payment_router)
 
 @app.get("/")
 def read_root():

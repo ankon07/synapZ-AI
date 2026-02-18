@@ -26,26 +26,27 @@ import LerneeHistory from "./pages/LerneeHistory";
 import ParentDashboard from "./pages/ParentDashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
-const ProtectedRoute = ({ 
-  children, 
-  allowedRoles 
-}: { 
-  children: React.ReactNode; 
-  allowedRoles: ('learner' | 'parent')[];
+const ProtectedRoute = ({
+  children,
+  allowedRoles,
+}: {
+  children: React.ReactNode;
+  allowedRoles: ("learner" | "parent")[];
 }) => {
   const { userRole } = useAuth();
-  
+
   if (!userRole) {
     return <Navigate to="/" replace />;
   }
-  
+
   if (!allowedRoles.includes(userRole)) {
     return <Navigate to="/" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -71,6 +72,7 @@ const AppRoutes = () => {
       <Route path="/lernee-history" element={<LerneeHistory />} />
       <Route path="/parent" element={<ParentDashboard />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/pricing" element={<Pricing />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
