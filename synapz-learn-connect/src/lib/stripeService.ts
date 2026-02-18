@@ -76,6 +76,29 @@ export const PRICING_PLANS: PricingPlan[] = [
     highlighted: false,
     badge: 'Best Value',
   },
+  {
+    id: 'master',
+    name: 'Master',
+    price: 90,
+    currency: '$',
+    interval: 'month',
+    paymentLink: 'https://buy.stripe.com/7sYbJ3d2vfRg2pS7hj7EQ07',
+    description: 'The ultimate all-inclusive learning experience',
+    features: [
+      'Everything in Premium',
+      'Dedicated AI learning assistant',
+      'One-on-one career mentoring',
+      'Advanced analytics & reports',
+      'Organization/school admin tools',
+      'API access for custom integrations',
+      'White-glove onboarding support',
+      'Early access to new features',
+      'Unlimited team members',
+      'SLA-backed uptime guarantee',
+    ],
+    highlighted: false,
+    badge: 'Enterprise',
+  },
 ];
 
 /**
