@@ -37,14 +37,22 @@ const ProtectedRoute = ({
   children: React.ReactNode;
   allowedRoles: ("learner" | "parent")[];
 }) => {
-  const { userRole } = useAuth();
+  const { userRole, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-violet-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!userRole) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (!allowedRoles.includes(userRole)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;
@@ -53,9 +61,16 @@ const ProtectedRoute = ({
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      {/* Landing page = Pricing */}
+      <Route path="/" element={<Pricing />} />
+      <Route path="/pricing" element={<Pricing />} />
+
+      {/* Auth pages */}
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+
+      {/* App pages */}
       <Route path="/modules" element={<ModuleSelector />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/lessons" element={<Lessons />} />
@@ -72,7 +87,6 @@ const AppRoutes = () => {
       <Route path="/lernee-history" element={<LerneeHistory />} />
       <Route path="/parent" element={<ParentDashboard />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/pricing" element={<Pricing />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
